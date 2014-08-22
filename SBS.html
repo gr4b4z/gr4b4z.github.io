@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap-3.2.0/docs/favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.2.0/docs/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 
+
+https://github.com/asyraf9/bootstrap-sidebar
+-->
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+    <link href="bootstrap-sidebar-master\dist\css\sidebar.css" rel="stylesheet">
+
+    <link href="http://angular-ui.github.io/ng-grid/css/ng-grid.css" rel="stylesheet">
+    <link href="http://ivaynberg.github.io/select2/select2-3.4.5/select2.css" rel="stylesheet">
+    <link href="http://fk.github.io/select2-bootstrap-css/css/select2-bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+
+    <style>
+    @media only screen and (max-width: 800px) {
+        /* Force table to not be like tables anymore */
+        #no-more-tables table,
+        #no-more-tables thead,
+        #no-more-tables tbody,
+        #no-more-tables th,
+        #no-more-tables td,
+        #no-more-tables tr {
+            display: block;
+        }
+        /* Hide table headers (but not display: none;, for accessibility) */
+        #no-more-tables thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        #no-more-tables tr {
+            border: 1px solid #ccc;
+        }
+        #no-more-tables td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            white-space: normal;
+            text-align: left;
+        }
+        #no-more-tables td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+        /*
+    Label the data
+    */
+        #no-more-tables td:before {
+            content: attr(data-title);
+        }
+    }
+    .trash {
+        color: rgb(209, 91, 71);
+    }
+    .filter-col {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    </style>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="bootstrap-3.2.0/docs/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap-3.2.0/docs/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap-3.2.0/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="MyCtrl">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="header_logo.png" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <p class="navbar-text navbar-right">Sylwester Grabowski (EU/EU Demo 2) &nbsp;
+                    <a href="#" class="navbar-link" title="Logout">
+                        <span class="glyphicon glyphicon-off" />
+                    </a>
+                </p>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li><a href="categoryLib.html">Administration</a>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <!--      <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show">-->
+
+                <div class="col-xs-7 col-sm-3 col-md-2 sidebar sidebar-left sidebar-animate sidebar-md-show main-nav">
+                <ul class="nav nav-sidebar">
+                    <li><a href=""><b>Filing Viewer</b></a>
+                    </li>
+
+                    <li><a href="FV1.3.html">&nbsp;BCL S.13*</a>
+                    </li>
+                    <li><a href="#">&nbsp;BCL S2.13</a>
+                    </li>
+                    <li><a href="#">&nbsp;BCL S1.6</a>
+                    </li>
+                    <li class="active"><a href="SBS.html">&nbsp;BCL SBS*</a>
+                    </li>
+                    <li><a href="#">&nbsp;CSSF 01.1</a>
+                    </li>
+                    <li><a href="#">&nbsp;CSSF 04.1</a>
+                    </li>
+                    <li><a href="#">&nbsp;CSSF 04.2</a>
+                    </li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href=""><b>Data Repository</b></a>
+                    </li>
+
+                    <li><a href="Holdings2.html">&nbsp;Holdings*</a>
+                    </li>
+                    <li><a href="TrialBalance.html">&nbsp;Trial Balance*</a>
+                    </li>
+                    <li><a href="#">&nbsp;Capital Transactions</a>
+                    </li>
+                    <li><a href="#">&nbsp;Purchase & Sales</a>
+                    </li>
+                    <li><a href="#">&nbsp;Suplemental</a>
+                    </li>
+                </ul>
+</div>
+            <div class="col-sm-9 col-md-10 col-md-offset-2  main">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                03/31/2014<b class="caret"></b>
+            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">12/31/2012</a>
+                                    </li>
+                                    <li><a href="#">12/31/2013</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                RR Donnelley <b class="caret"></b>
+            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Level 2.1</a>
+                                    </li>
+                                    <li><a href="#">Level 2.2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">BCL: SBS</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div>
+                    <h3 class="sub-header">BCL: SBS</h2>
+                        <nav class="navbar navbar-default" role="navigation">
+                            <div class="container-fluid">
+
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">Menu</a>
+                                </div>
+
+                                <div class="navbar-collapse collapse" id="navbar-collapsible">
+
+                                    <div class="navbar-form navbar-left btn-group">
+                                        <button type="button" class="btn btn-default">Generate SBS Filing</button>
+                                    </div>
+
+
+                                    <div class="navbar-form navbar-right">
+                                        <label>Order by</label>:
+                                        <div class="form-group">
+                                            <select class="form-control">
+                                                <option selected>Quantity [A-Z]</option>
+                                                <option value="type">English</option>
+                                                <option value="createdby">Polish</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <form class="navbar-form">
+                                        <div class="form-group" style="display:inline;">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </nav>
+
+                        <div>
+
+
+                            <div class="row sw">
+
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <div>
+
+                                        <div style="margin-top:10px">
+                                            <div class="row sw">
+                                                <div class="col-md-12">
+                                                    <div class="well well-sm">
+                                                        <div class="row">
+                                                            <div class="col-xs-10 col-md-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-12 col-md-3 up" style="padding-left:20px">
+                                                                        <h3 style="margin-top:4px;margin-bottom:0px">
+                                                                            Statoil
+                                                                            <small>
+                                                                                Oil & Gass
+                                                                            </small>
+                                                                        </h3>
+                                                                        <h5 style="margin-top:0">
+                                                                            <small>ISIN: LU236632536</small>
+                                                                            </br>
+                                                                            <small>Other: LU236632536</small>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Quantity : 10.000</li>
+                                                                            <li>Market value: $103,5546</li>
+                                                                            <li>Currency: <i class="fa fa-eur"></i> EUR</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Maturity Date: 10/10/2015</li>
+                                                                            <li>Security type: Equity</li>
+                                                                            <li>Coupon: 2%</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Payment of last Coupon: 10/10/2015</li>
+                                                                            <li>CSSF Class Code: 123</li>
+                                                                            <li>Type: 1</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-2 col-md-2 text-center">
+                                                                <b>Issuer:</b>
+                                                                <ul class="list-unstyled">
+                                                                    <li>Country:
+                                                                        <img src="flags/gb.png">UK</li>
+                                                                    <li>Currency: <i class="fa fa-usd"></i> USD</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="well well-sm well-white">
+                                                        <div class="row">
+                                                            <div class="col-xs-10 col-md-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-12 col-md-3 up" style="padding-left:20px">
+                                                                        <h3 style="margin-top:4px;margin-bottom:0px">
+                                                                            BP
+                                                                            <small>
+                                                                                Oil & Gass
+                                                                            </small>
+                                                                        </h3>
+                                                                        <h5 style="margin-top:0">
+                                                                            <small>ISIN: LU236632536</small>
+                                                                            </br>
+                                                                            <small>Other: LU236632536</small>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Quantity : 10.000</li>
+                                                                            <li>Market value: $103,5546</li>
+                                                                            <li>Currency: <i class="fa fa-eur"></i> EUR</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Maturity Date: 10/10/2015</li>
+                                                                            <li>Coupon: 2%</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Payment of last Coupon: 10/10/2015</li>
+                                                                            <li>CSSF Class Code: 123</li>
+                                                                            <li>Type: 1</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-2 col-md-2 text-center">
+                                                                <b>Issuer:</b>
+                                                                <ul class="list-unstyled">
+                                                                    <li>Country:
+                                                                        <img src="flags/gb.png">UK</li>
+                                                                    <li>Currency: <i class="fa fa-usd"></i> USD</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="well well-sm">
+                                                        <div class="row">
+                                                            <div class="col-xs-10 col-md-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-12 col-md-3 up" style="padding-left:20px">
+                                                                        <h3 style="margin-top:4px;margin-bottom:0px">
+                                                                            AN Other
+                                                                            <small>
+                                                                                Bonds
+                                                                            </small>
+                                                                        </h3>
+                                                                        <h5 style="margin-top:0">
+                                                                            <small>ISIN: LU236632536</small>
+                                                                            </br>
+                                                                            <small>Other: LU236632536</small>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Quantity : 10.000</li>
+                                                                            <li>Market value: $103,5546</li>
+                                                                            <li>Currency: <i class="fa fa-eur"></i> EUR</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Maturity Date: 10/10/2015</li>
+                                                                            <li>Security type: Equity</li>
+                                                                            <li>Coupon: 2%</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Payment of last Coupon: 10/10/2015</li>
+                                                                            <li>CSSF Class Code: 123</li>
+                                                                            <li>Type: 1</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-2 col-md-2 text-center">
+                                                                <b>Issuer:</b>
+                                                                <ul class="list-unstyled">
+                                                                    <li>Country:
+                                                                        <img src="flags/gb.png">UK</li>
+                                                                    <li>Currency: <i class="fa fa-usd"></i> USD</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="well well-sm well-white">
+                                                        <div class="row">
+                                                            <div class="col-xs-10 col-md-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-12 col-md-3 up" style="padding-left:20px">
+                                                                        <h3 style="margin-top:4px;margin-bottom:0px">
+                                                                            Drake Ltd
+                                                                            <small>
+                                                                                Technology
+                                                                            </small>
+                                                                        </h3>
+                                                                        <h5 style="margin-top:0">
+                                                                            <small>ISIN: LU236632536</small>
+                                                                            </br>
+                                                                            <small>Other: LU236632536</small>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Quantity : 10.000</li>
+                                                                            <li>Market value: $103,5546</li>
+                                                                            <li>Currency: <i class="fa fa-eur"></i> EUR</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Maturity Date: 10/10/2015</li>
+                                                                            <li>Security type: Equity</li>
+                                                                            <li>Coupon: 2%</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-3">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>Payment of last Coupon: 10/10/2015</li>
+                                                                            <li>CSSF Class Code: 123</li>
+                                                                            <li>Type: 1</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-2 col-md-2 text-center">
+                                                                <b>Issuer:</b>
+                                                                <ul class="list-unstyled">
+                                                                    <li>Country:
+                                                                        <img src="flags/gb.png">UK</li>
+                                                                    <li>Currency: <i class="fa fa-usd"></i> USD</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    </div>
+
+
+    <footer>
+        <hr style="margin-bottom:0">
+        <p class="text-right">&copy; RR Donnelley 2014</p>
+    </footer>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Add\Edit Aggregation Point</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Please write  name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Filing</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" tabindex="-1">
+                                    <option value="pl" selected="">BCL S1.3</option>
+                                    <option value="pl" selected="">BCL S1.3</option>
+                                    <option value="pl" selected="">BCL S1.3</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Calculation line</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Source</th>
+                                        <th>Operator</th>
+                                        <th>Accounts</th>
+                                        <th>Repeat behavior</th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Trial balance</td>
+                                        <td>Group</td>
+                                        <td>100000,100003</td>
+                                        <td>Currency</td>
+                                        <td>
+                                            <a>
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </a>
+                                            <a href="" class="trash">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input class="form-control">
+                                        </td>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" tabindex="-1">
+                                                <option selected="">/</option>
+                                                <option selected="">*</option>
+                                                <option selected="">+</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select multiple="" name="e1" class="form-control sl2" tabindex="-1">
+                                                <option value="pl" selected="">125454</option>
+                                                <option value="en">7854554</option>
+                                                <option value="us">985455784</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <select class="form-control" tabindex="-1">
+                                                <option selected>Currency</option>
+                                                <option>*</option>
+                                                <option>+</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <a>
+                                                <span class="glyphicon glyphicon-floppy-disk"></span>
+                                            </a>
+                                            <a href="" class="trash">
+                                                <span class="glyphicon glyphicon-floppy-remove"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://angular-ui.github.io/ng-grid/lib/angular.js"></script>
+    <script src="http://angular-ui.github.io/ng-grid/lib/ng-grid.debug.js"></script>
+    <script src="bootstrap-3.2.0/docs/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.2.0/docs/assets/js/docs.min.js"></script>
+    <script src="http://ivaynberg.github.io/select2/select2-3.5.1/select2.js"></script>
+
+    <script src="bootstrap-sidebar-master/dist/js/sidebar.js" rel="stylesheet"></script>
+    <script>
+    var app = angular.module('myApp', ['ngGrid']);
+
+    app.controller('MyCtrl', function($scope) {
+
+
+    });
+    $(".sl2").select2();
+    </script>
+
+</body>
+
+</html>

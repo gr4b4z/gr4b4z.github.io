@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap-3.2.0/docs/favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.2.0/docs/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 
+
+https://github.com/asyraf9/bootstrap-sidebar
+-->
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+    <link href="bootstrap-sidebar-master\dist\css\sidebar.css" rel="stylesheet">
+
+    <link href="http://angular-ui.github.io/ng-grid/css/ng-grid.css" rel="stylesheet">
+    <link href="http://ivaynberg.github.io/select2/select2-3.4.5/select2.css" rel="stylesheet">
+    <link href="http://fk.github.io/select2-bootstrap-css/css/select2-bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://khan4019.github.io/tree-grid-directive/src/treeGrid.css" rel="stylesheet">
+
+
+
+
+    <style>
+    @media only screen and (max-width: 800px) {
+        /* Force table to not be like tables anymore */
+        #no-more-tables table,
+        #no-more-tables thead,
+        #no-more-tables tbody,
+        #no-more-tables th,
+        #no-more-tables td,
+        #no-more-tables tr {
+            display: block;
+        }
+        /* Hide table headers (but not display: none;, for accessibility) */
+        #no-more-tables thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        #no-more-tables tr {
+            border: 1px solid #ccc;
+        }
+        #no-more-tables td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            white-space: normal;
+            text-align: left;
+        }
+        #no-more-tables td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+        /*
+    Label the data
+    */
+        #no-more-tables td:before {
+            content: attr(data-title);
+        }
+    }
+    .trash {
+        color: rgb(209, 91, 71);
+    }
+    </style>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="bootstrap-3.2.0/docs/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap-3.2.0/docs/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap-3.2.0/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="MyCtrl">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="header_logo.png" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <p class="navbar-text navbar-right">Sylwester Grabowski (EU/EU Demo 2) &nbsp;
+                    <a href="#" class="navbar-link" title="Logout">
+                        <span class="glyphicon glyphicon-off" />
+                    </a>
+                </p>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">Dashboard</a>
+                    </li>
+                    <li><a href="categoryLib.html">Administration</a>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <!--      <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show">-->
+
+            <div class="col-xs-7 col-sm-3 col-md-2 sidebar sidebar-left sidebar-animate sidebar-md-show main-nav">
+                <ul class="nav nav-sidebar">
+                    <li><a href=""><b>Filing Viewer</b></a>
+                    </li>
+
+                    <li><a href="FV1.3.html">&nbsp;BCL S.13*</a>
+                    </li>
+                    <li><a href="#">&nbsp;BCL S2.13</a>
+                    </li>
+                    <li><a href="#">&nbsp;BCL S1.6</a>
+                    </li>
+                    <li><a href="SBS.html">&nbsp;BCL SBS*</a>
+                    </li>
+                    <li><a href="#">&nbsp;CSSF 01.1</a>
+                    </li>
+                    <li><a href="#">&nbsp;CSSF 04.1</a>
+                    </li>
+                    <li><a href="#">&nbsp;CSSF 04.2</a>
+                    </li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href=""><b>Data Repository</b></a>
+                    </li>
+
+                    <li><a href="Holdings2.html">&nbsp;Holdings *</a>
+                    </li>
+                    <li class="active"><a href="#">&nbsp;Trial Balance *</a>
+                    </li>
+                    <li><a href="#">&nbsp;Capital Transactions</a>
+                    </li>
+                    <li><a href="#">&nbsp;Purchase & Sales</a>
+                    </li>
+                    <li><a href="#">&nbsp;Suplemental</a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-sm-9 col-md-10 col-md-offset-2  main">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                03/31/2014<b class="caret"></b>
+            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">12/31/2012</a>
+                                    </li>
+                                    <li><a href="#">12/31/2013</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                RR Donnelley <b class="caret"></b>
+            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Level 2.1</a>
+                                    </li>
+                                    <li><a href="#">Level 2.2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">RRD SICAV</a></li><li class="active">All Funds</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="sub-header">Trial Balance
+                        <small style="font-size:50%">Status:
+                            <span class="label label-info">Calculated (
+                                <span class="glyphicon glyphicon-calendar"></span>1/02/2014 11:12:13)</span>
+                        </small>
+                    </h2>
+                    <div>
+                        <div class="row sw">
+
+                            <div class="col-md-12">
+                                <tree-grid tree-data="tree_data" tree-control="my_tree" col-defs="col_defs" expand-on="expanding_property" on-select="my_tree_handler(branch)" expand-level="2" icon-leaf="glyphicon glyphicon-globe"></tree-grid>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <footer>
+            <hr style="margin-bottom:0">
+            <p class="text-right">&copy; RR Donnelley 2014</p>
+        </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+
+    <script src="bootstrap-3.2.0/docs/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.2.0/docs/assets/js/docs.min.js"></script>
+    <script src="http://ivaynberg.github.io/select2/select2-3.5.1/select2.js"></script>
+
+    <script src="bootstrap-sidebar-master/dist/js/sidebar.js" rel="stylesheet"></script>
+    <script src="http://khan4019.github.io/tree-grid-directive/src/tree-grid-directive.js" rel="stylesheet"></script>
+    <script>
+    var app = angular.module('myApp', ['treeGrid']);
+
+    app.controller('MyCtrl', function($scope) {
+        var tree;
+
+        var rawTreeData = [{
+            "Id": 1,
+            "ParentId": null,
+            "Name": "Assets",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 288886684857,
+            "EBalanceRo": 288886684857,
+            "EBalanceFo": 288886684857
+        }, {
+            "Id": 2,
+            "ParentId": 1,
+            "Name": "Total Assets",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 5434,
+            "EBalanceRo": 4356436,
+            "EBalanceFo": 643634
+        }, {
+            "Id": 3,
+            "ParentId": 2,
+            "Name": "Income",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 547,
+            "EBalanceRo": 346436,
+            "EBalanceFo": 3464
+        }, {
+            "Id": 4,
+            "ParentId": 2,
+            "Name": "Total Income",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 5467,
+            "EBalanceRo": 4546,
+            "EBalanceFo": 345643
+        }, {
+            "Id": 5,
+            "ParentId": 1,
+            "Name": "Equity",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 346346,
+            "EBalanceRo": 43643,
+            "EBalanceFo": 346436
+        }, {
+            "Id": 6,
+            "ParentId": 5,
+            "Name": "Memo Debit",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 346346,
+            "EBalanceRo": 46436,
+            "EBalanceFo": 657657
+        }, {
+            "Id": 7,
+            "ParentId": 1,
+            "Name": "Expenses",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 37,
+            "EBalanceRo": 7473,
+            "EBalanceFo": 73743
+        }, {
+            "Id": 8,
+            "ParentId": 1,
+            "Name": "Total Expenses",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 45754,
+            "EBalanceRo": 54754,
+            "EBalanceFo": 547547
+        }, {
+            "Id": 14,
+            "ParentId": 8,
+            "Name": "ABC1",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 54345,
+            "EBalanceRo": 767,
+            "EBalanceFo": 535345
+        }, {
+            "Id": 15,
+            "ParentId": 14,
+            "Name": "Net Asses",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 5465,
+            "EBalanceRo": 565465,
+            "EBalanceFo": 546546
+        }, {
+            "Id": 16,
+            "ParentId": 14,
+            "Name": "TT AC",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 34626,
+            "EBalanceRo": 658756,
+            "EBalanceFo": 6546
+        }, {
+            "Id": 17,
+            "ParentId": 8,
+            "Name": "Other assets",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 3466643,
+            "EBalanceRo": 6346,
+            "EBalanceFo": 28888654684857
+        }, {
+            "Id": 18,
+            "ParentId": 8,
+            "Name": "Liabilities",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 45345,
+            "EBalanceRo": 6767,
+            "EBalanceFo": 45345
+        }, {
+            "Id": 51,
+            "ParentId": 1,
+            "Name": "All_Other",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 54345435,
+            "EBalanceRo": 567547,
+            "EBalanceFo": 54345
+        }, {
+            "Id": 201,
+            "ParentId": null,
+            "Name": "Liabilities",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 565463,
+            "EBalanceRo": 34634,
+            "EBalanceFo": 735473
+        }, {
+            "Id": 301,
+            "ParentId": null,
+            "Name": "Total Liabilities",
+            "BBalance": 1254,
+            "CDebit": 9825,
+            "CCredit": 3100,
+            "EBalance": 3747,
+            "EBalanceRo": 364,
+            "EBalanceFo": 373473
+        }];
+
+
+        var myTreeData = getTree(rawTreeData, 'Id', 'ParentId');
+
+        $scope.tree_data = myTreeData;
+        $scope.my_tree = tree = {};
+        $scope.expanding_property = "Name";
+        $scope.col_defs = [{
+            field: "BBalance",
+            displayName: "Beginning Balance"
+        }, {
+            field: "CDebit",
+            displayName: "Cumulative Debit"
+        }, {
+            field: "CCredit",
+            displayName: "Cumulative Credit"
+        }, {
+            field: "EBalance",
+            displayName: "Ending Balance (Raw)"
+        }, {
+            field: "EBalanceRo",
+            displayName: "Ending Balance (Rounded)"
+        }, {
+            field: "EBalanceFo",
+            displayName: "Ending Balance (Footed)"
+        }];
+        $scope.my_tree_handler = function(branch) {
+            console.log('you clicked on', branch)
+        }
+
+        function getTree(data, primaryIdName, parentIdName) {
+            if (!data || data.length == 0 || !primaryIdName || !parentIdName)
+                return [];
+
+            var tree = [],
+                rootIds = [],
+                item = data[0],
+                primaryKey = item[primaryIdName],
+                treeObjs = {},
+                parentId,
+                parent,
+                len = data.length,
+                i = 0;
+
+            while (i < len) {
+                item = data[i++];
+                primaryKey = item[primaryIdName];
+                treeObjs[primaryKey] = item;
+                parentId = item[parentIdName];
+
+                if (parentId) {
+                    parent = treeObjs[parentId];
+
+                    if (parent.children) {
+                        parent.children.push(item);
+                    } else {
+                        parent.children = [item];
+                    }
+                } else {
+                    rootIds.push(primaryKey);
+                }
+            }
+
+            for (var i = 0; i < rootIds.length; i++) {
+                tree.push(treeObjs[rootIds[i]]);
+            };
+
+            return tree;
+        }
+
+
+    });
+    </script>
+
+</body>
+
+</html>
